@@ -1,0 +1,10 @@
+# MAIN THINGS 
+
+## START PAGE
+ [ ]
+
+## LESSON PAGE
+
+## PROFILE PAGE
+
+## BACKEND
