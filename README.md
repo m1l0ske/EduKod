@@ -8,3 +8,4 @@
 ## PROFILE PAGE
 
 ## BACKEND
+ [ ] sifra da se hashuje
