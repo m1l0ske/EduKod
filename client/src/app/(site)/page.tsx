@@ -1,6 +1,7 @@
 import CanvasSetUp from "../_components/CanvasSetUp";
 
 export default function Page() {
+  
     return (
       <main className="h-screen w-screen bg-black grid grid-cols-1 p-4 pb-12 md:p-8 lg:p-16">
           <div className="fixed top-0 right-0 left-0 bottom-0 z-10">

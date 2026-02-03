@@ -128,9 +128,49 @@ exports.Prisma.PostScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.QuestionScalarFieldEnum = {
+  id: 'id',
+  lessonId: 'lessonId',
+  question: 'question',
+  answer: 'answer'
+};
+
+exports.Prisma.LessonBlockScalarFieldEnum = {
+  id: 'id',
+  lessonId: 'lessonId',
+  order: 'order',
+  type: 'type',
+  text: 'text',
+  imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl',
+  animation: 'animation'
+};
+
+exports.Prisma.LessonScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  thumbnail: 'thumbnail'
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  username: 'username',
+  password: 'password',
+  mail: 'mail',
+  image: 'image',
+  completed: 'completed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -138,9 +178,29 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.BlockType = exports.$Enums.BlockType = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO',
+  ANIMATION: 'ANIMATION'
+};
 
 exports.Prisma.ModelName = {
-  Post: 'Post'
+  Post: 'Post',
+  Question: 'Question',
+  LessonBlock: 'LessonBlock',
+  Lesson: 'Lesson',
+  User: 'User'
 };
 
 /**

@@ -100,9 +100,49 @@ exports.Prisma.PostScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.QuestionScalarFieldEnum = {
+  id: 'id',
+  lessonId: 'lessonId',
+  question: 'question',
+  answer: 'answer'
+};
+
+exports.Prisma.LessonBlockScalarFieldEnum = {
+  id: 'id',
+  lessonId: 'lessonId',
+  order: 'order',
+  type: 'type',
+  text: 'text',
+  imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl',
+  animation: 'animation'
+};
+
+exports.Prisma.LessonScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  thumbnail: 'thumbnail'
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  username: 'username',
+  password: 'password',
+  mail: 'mail',
+  image: 'image',
+  completed: 'completed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -110,9 +150,29 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.BlockType = exports.$Enums.BlockType = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO',
+  ANIMATION: 'ANIMATION'
+};
 
 exports.Prisma.ModelName = {
-  Post: 'Post'
+  Post: 'Post',
+  Question: 'Question',
+  LessonBlock: 'LessonBlock',
+  Lesson: 'Lesson',
+  User: 'User'
 };
 /**
  * Create the Client
@@ -143,7 +203,8 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.19.2",
@@ -152,7 +213,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -161,13 +221,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  name      String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([name])\n}\n",
-  "inlineSchemaHash": "4dfee2d805d63053d5ae63a6ff65a5c68e353713bdd4147909d9158ea83d8e0f",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  name      String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([name])\n}\n\nmodel Question {\n  id       Int    @id @default(autoincrement())\n  lessonId Int\n  question String\n  answer   String\n\n  lesson Lesson @relation(fields: [lessonId], references: [id])\n}\n\nenum BlockType {\n  TEXT\n  IMAGE\n  VIDEO\n  ANIMATION\n}\n\nmodel LessonBlock {\n  id       Int @id @default(autoincrement())\n  lessonId Int\n  order    Int\n\n  type BlockType\n\n  text      String?\n  imageUrl  String?\n  videoUrl  String?\n  animation Json?\n\n  lesson Lesson @relation(fields: [lessonId], references: [id])\n\n  @@unique([lessonId, order])\n}\n\nmodel Lesson {\n  id        Int           @id @default(autoincrement())\n  title     String\n  thumbnail String\n  blocks    LessonBlock[]\n  questions Question[]\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  username  String\n  password  String\n  mail      String   @unique\n  image     String?\n  completed Int[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
+  "inlineSchemaHash": "4b15ab8de7c06c0d4ddeb71b7506a0c2242168e092242ef7ca6741577806762b",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Question\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lessonId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"question\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"answer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lesson\",\"kind\":\"object\",\"type\":\"Lesson\",\"relationName\":\"LessonToQuestion\"}],\"dbName\":null},\"LessonBlock\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lessonId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"order\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"BlockType\"},{\"name\":\"text\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"videoUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"animation\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"lesson\",\"kind\":\"object\",\"type\":\"Lesson\",\"relationName\":\"LessonToLessonBlock\"}],\"dbName\":null},\"Lesson\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"thumbnail\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"blocks\",\"kind\":\"object\",\"type\":\"LessonBlock\",\"relationName\":\"LessonToLessonBlock\"},{\"name\":\"questions\",\"kind\":\"object\",\"type\":\"Question\",\"relationName\":\"LessonToQuestion\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mail\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"completed\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
