@@ -11,14 +11,6 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([name])
-}
 
 
 model Question {
@@ -64,12 +56,51 @@ model Lesson {
 }
 
 model User {
-    id Int @id @default(autoincrement())
-    username      String
-    password      String
-    mail          String @unique
+    id            String    @id @default(cuid())
+    name          String
+    password      String?
+    email          String? @unique
+    emailVerified  DateTime?
     image         String?
     completed     Int[]
+    accounts Account[]
+    sessions Session[]
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }

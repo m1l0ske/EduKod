@@ -1,11 +1,8 @@
 # MAIN THINGS 
 
-## START PAGE
- [ ]
+## STEPS
 
-## LESSON PAGE
 
-## PROFILE PAGE
 
 ## BACKEND
  [ ] sifra da se hashuje

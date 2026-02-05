@@ -3,4 +3,22 @@
 @theme {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+
+  --color-primary: #18171C;
+  --color-accent-color: #9A9A9C;
+
+  --color-primary-dark: #2F4157;
+  
+  --color-semaphore: #FFC400;
+  --color-positive: #128C81;
+
+  --radius-medium: 4rem;
+  --radius-small: 3rem;
+
+
+  --text-extra-large: 13rem;
+  --spacing-height-extra-large: 1.1;
+  --text-large: 10rem;
+
 }

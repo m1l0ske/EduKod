@@ -7,10 +7,11 @@ import Model from "./Model"
 
 const CanvasSetUp = () => (
   <Canvas
+
     shadows
     camera={{ position: [3, 3, 5], fov: 50 }}
   >
-
+    <color attach="background" args={["#18171C"]} />
     <CameraControls makeDefault />
 
     <ambientLight intensity={0.3} />
